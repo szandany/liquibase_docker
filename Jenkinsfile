@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'liquibase/liquibase:latest' }
+        docker { image 'liquibase/liquibase' }
     }
     stages {
         stage('Test') {
