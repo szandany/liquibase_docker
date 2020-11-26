@@ -5,9 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh  '''
-               echo "hello"
-                '''
+                sh 'liquibase/liquibase --version'
             }
         }
     }
