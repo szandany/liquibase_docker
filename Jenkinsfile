@@ -25,6 +25,8 @@ agent any
           # { set +x; } 2>/dev/null
           cwd=$(pwd)
           docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_dev" --changeLogFile=changelog/changeLog.h2.sql --username=admin --password=password status --verbose
+          docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_dev" --changeLogFile=changelog/changeLog.h2.sql --username=admin --password=password updateSQL
+          docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_dev" --changeLogFile=changelog/changeLog.h2.sql --username=admin --password=password --logLevel=debug update
           '''
       } // steps for checkout stages
     } // stage 'checkout'
