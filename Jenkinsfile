@@ -13,7 +13,6 @@ agent any
     stage ('Precheck docker and Liquibase version') {
 		steps {
 			sh '''
-        # { set +x; } 2>/dev/null
         docker --version
 			'''
 		} // steps
@@ -23,7 +22,6 @@ agent any
       steps {
         // checkout Liquibase project from CLO repo
         sh '''
-          # { set +x; } 2>/dev/null
           cwd=$(pwd)
           docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changelog/changeLog.h2.sql --username=admin --password=password status --verbose
           docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changelog/changeLog.h2.sql --username=admin --password=password updateSQL
