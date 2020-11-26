@@ -5,11 +5,11 @@
 pipeline {
 agent any
   environment {
-    PATH="/usr/local/bin/docker:$PATH"
+    PATH="/usr/local/bin:$PATH"
   }
   stages {
 
-    stage ('Precheck docker version') {
+    stage ('Precheck docker and Liquibase version') {
 		steps {
 			sh '''
         { set +x; } 2>/dev/null
