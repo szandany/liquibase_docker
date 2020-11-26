@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'liquibase/liquibase --version'
+                sh  'docker --version'
             }
         }
     }
