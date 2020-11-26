@@ -14,8 +14,20 @@ agent any
 			sh '''
         { set +x; } 2>/dev/null
         docker --version
+        echo "Current workspace is ${env.WORKSPACE}"
 			'''
 		} // steps
 	} // stage 'precheck'
+  
+  stage ('running liquibase with docker') {
+      steps {
+        // checkout Liquibase project from CLO repo
+        sh '''
+          { set +x; } 2>/dev/null
+          echo "Current workspace is ${env.WORKSPACE}"
+          '''
+      } // steps for checkout stages
+    } // stage 'checkout'
+    
   } // stages
 }  // pipeline
