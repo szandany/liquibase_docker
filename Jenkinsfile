@@ -6,7 +6,7 @@ pipeline {
 agent any
   environment {
     PATH="/usr/local/bin:$PATH"
-    ENVIRONMENT_STEP="${params.Pipeline Step}"
+    ENVIRONMENT_STEP="${params.'Pipeline Step'}"
   }
   stages {
 
