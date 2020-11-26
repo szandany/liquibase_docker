@@ -9,11 +9,12 @@ agent any
   }
   stages {
 
-    stage ('Precheck docker version') {
+    stage ('Precheck docker and Liquibase version') {
 		steps {
 			sh '''
         { set +x; } 2>/dev/null
         docker --version
+	docker run --rm liquibase/liquibase:latest --version
 			'''
 		} // steps
 	} // stage 'precheck'
