@@ -1,12 +1,21 @@
+#!/usr/bin/env groovy
+// Liquibase declarative pipeline
+//
+//
 pipeline {
-    agent {
-        docker { image 'liquibase/liquibase' }
-    }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'liquibase/liquibase --version'
-            }
-        }
-    }
-}
+agent any
+  environment {
+    PATH="/usr/local/bin/docker:$PATH"
+  }
+  stages {
+
+    stage ('Precheck docker version') {
+		steps {
+			sh '''
+        { set +x; } 2>/dev/null
+        docker --version
+			'''
+		} // steps
+	} // stage 'precheck'
+  } // stages
+}  // pipeline
