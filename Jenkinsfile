@@ -14,6 +14,7 @@ agent any
 		steps {
 			sh '''
         docker --version
+	liquibase --version
 			'''
 		} // steps
 	} // stage 'precheck'
