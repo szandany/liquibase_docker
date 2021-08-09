@@ -22,11 +22,21 @@ agent any
       steps {
         // checkout Liquibase project from CLO repo
         sh '''
-          cwd=$(pwd)
-          docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password status --verbose
-          docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password updateSQL
-          docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password --logLevel=debug update
-	  docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password --logLevel=debug rollbackCount 1
+        cwd=$(pwd)
+        docker run \
+	--env LIQUIBASE_COMMAND_USERNAME \
+	--env LIQUIBASE_COMMAND_PASSWORD \
+	--env LIQUIBASE_COMMAND_URL \
+	--env LIQUIBASE_PRO_LICENSE_KEY \
+	--rm \
+	-v "${cwd}"/changelogs:/liquibase/changelog:z \
+	liquibase/liquibase:latest status --verbose
+          
+	  
+	  
+	 # docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password updateSQL
+         # docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password --logLevel=debug update
+	 # docker run --rm -v "${cwd}"/changelogs:/liquibase/changelog:z liquibase/liquibase:latest --url="jdbc:h2:mem:liquibase_${ENVIRONMENT_STEP}" --changeLogFile=changeLog.h2.sql --username=admin --password=password --logLevel=debug rollbackCount 1
           '''
       } // steps for checkout stages
     } // stage 'checkout'
