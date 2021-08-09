@@ -22,18 +22,10 @@ agent any
       steps {
         // checkout Liquibase project from CLO repo
         sh '''
-        . ~/exp_lb_env_vars_h2.sh
-	cwd=$(pwd)
-        docker run \
-	--env LIQUIBASE_COMMAND_USERNAME \
-	--env LIQUIBASE_COMMAND_PASSWORD \
-	--env LIQUIBASE_COMMAND_URL \
-	--env LIQUIBASE_PRO_LICENSE_KEY \
-	--env LIQUIBASE_COMMAND_CHANGELOG_FILE \
-	--rm \
-	-v "${cwd}"/changelogs:/liquibase/changelog:z \
-	liquibase/liquibase:latest status --verbose
-        
+	# setting Environment Variables
+	. ~/exp_lb_env_vars_h2.sh
+	
+	# running an update
         docker run \
 	--env LIQUIBASE_COMMAND_USERNAME \
 	--env LIQUIBASE_COMMAND_PASSWORD \
@@ -43,14 +35,6 @@ agent any
 	--rm \
 	-v "${cwd}"/changelogs:/liquibase/changelog:z \
 	liquibase/liquibase:latest --log-level=info update
-	
-	docker run \
-	--env LIQUIBASE_COMMAND_USERNAME \
-	--env LIQUIBASE_COMMAND_PASSWORD \
-	--env LIQUIBASE_COMMAND_URL \
-	--env LIQUIBASE_PRO_LICENSE_KEY \
-	--rm \
-	liquibase/liquibase:latest history
           '''
       } // steps for checkout stages
     } // stage 'checkout'
