@@ -49,9 +49,7 @@ agent any
 	--env LIQUIBASE_COMMAND_PASSWORD \
 	--env LIQUIBASE_COMMAND_URL \
 	--env LIQUIBASE_PRO_LICENSE_KEY \
-	--env LIQUIBASE_COMMAND_CHANGELOG_FILE \
 	--rm \
-	-v "${cwd}"/changelogs:/liquibase/changelog:z \
 	liquibase/liquibase:latest history
           '''
       } // steps for checkout stages
