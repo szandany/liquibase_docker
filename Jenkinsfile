@@ -22,7 +22,8 @@ agent any
       steps {
         // checkout Liquibase project from CLO repo
         sh '''
-        cwd=$(pwd)
+        . ~/exp_lb_env_vars_h2.sh
+	cwd=$(pwd)
         docker run \
 	--env LIQUIBASE_COMMAND_USERNAME \
 	--env LIQUIBASE_COMMAND_PASSWORD \
