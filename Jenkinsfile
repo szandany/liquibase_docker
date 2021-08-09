@@ -23,7 +23,7 @@ agent any
         // checkout Liquibase project from CLO repo
         sh '''	
 	# setting Environment Variables
-	. ~/exp_lb_env_vars_h2.sh &>/dev/null
+	. ~/env_var/exp_lb_env_vars_h2.sh &>/dev/null
 	
 	# running an update
         docker run \
