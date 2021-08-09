@@ -21,9 +21,9 @@ agent any
   stage ('running liquibase with docker') {
       steps {
         // checkout Liquibase project from CLO repo
-        sh '''
+        sh '''	
 	# setting Environment Variables
-	. ~/exp_lb_env_vars_h2.sh
+	. ~/exp_lb_env_vars_h2.sh &>/dev/null
 	
 	# running an update
         docker run \
