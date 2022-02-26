@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        docker {
+            image 'liquibase/liquibase:latest'
+            args '''
+            -v $PWD/CLI-Projects/changelogs:/liquibase/changelog
+                   -e LIQUIBASE_COMMAND_URL=jdbc:h2:mem:liquibase_dev
+                   -e LIQUIBASE_COMMAND_USERNAME=admin
+                   -e LIQUIBASE_COMMAND_PASSWORD=password 
+                   -e LIQUIBASE_PRO_LICENSE_KEY=$LIQUIBASE_PRO_LICENSE_KEY 
+                   -e LIQUIBASE_COMMAND_CHANGELOG_FILE=./changelogs/changeLog.h2.sql
+            '''
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh '''
+                liquibase --version
+                liquibase status --verbose
+                liquibase update
+                '''
+            }
+        }
+    }
+}
