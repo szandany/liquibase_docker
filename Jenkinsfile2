@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'liquibase/liquibase:4.8'
+            image 'liquibase/liquibase:4.6'
             args '''
                -e LIQUIBASE_COMMAND_URL=jdbc:h2:mem:liquibase_dev
                -e LIQUIBASE_COMMAND_USERNAME=admin
