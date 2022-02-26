@@ -3,7 +3,7 @@ pipeline {
         docker {
             image 'liquibase/liquibase:latest'
             args '''
-            -v $PWD/CLI-Projects/changelogs:/liquibase/changelog
+            -v $PWD/changelogs:/liquibase/changelog
                    -e LIQUIBASE_COMMAND_URL=jdbc:h2:mem:liquibase_dev
                    -e LIQUIBASE_COMMAND_USERNAME=admin
                    -e LIQUIBASE_COMMAND_PASSWORD=password 
