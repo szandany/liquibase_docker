@@ -3,12 +3,11 @@ pipeline {
         docker {
             image 'liquibase/liquibase:latest'
             args '''
-            -v $PWD/wrongPath/changelogs:/liquibase/changelog
-                   -e LIQUIBASE_COMMAND_URL=jdbc:h2:mem:liquibase_dev
-                   -e LIQUIBASE_COMMAND_USERNAME=admin
-                   -e LIQUIBASE_COMMAND_PASSWORD=password 
-                   -e LIQUIBASE_PRO_LICENSE_KEY 
-                   -e LIQUIBASE_COMMAND_CHANGELOG_FILE=./changelogs/changeLog.h2.sql
+               -e LIQUIBASE_COMMAND_URL=jdbc:h2:mem:liquibase_dev
+               -e LIQUIBASE_COMMAND_USERNAME=admin
+               -e LIQUIBASE_COMMAND_PASSWORD=password 
+               -e LIQUIBASE_PRO_LICENSE_KEY 
+               -e LIQUIBASE_COMMAND_CHANGELOG_FILE=./changelogs/changeLog.h2.sql
             '''
         }
     }
@@ -16,6 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
+                ls
                 liquibase --version
                 liquibase status --verbose
                 liquibase update
